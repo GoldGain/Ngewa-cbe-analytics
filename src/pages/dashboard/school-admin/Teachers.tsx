@@ -7,6 +7,7 @@ import { useTeachers } from '@/hooks/useSupabaseData';
 import { Search, Plus, Loader2, KeyRound, Pencil, Trash2, X } from 'lucide-react';
 import { toast } from 'sonner';
 import type { GenderType } from '@/types/database';
+import { sendSMS, generateWelcomeSMS } from '@/lib/sms';
 
 const DEFAULT_TEACHER_PASSWORD = 'Teacher@2025';
 
@@ -98,6 +99,21 @@ export default function SchoolAdminTeachers() {
         teacher_number: actualNextTeacherNumber,
       }]);
       if (teacherError) throw new Error(`Teacher record failed: ${teacherError.message}`);
+      // Send welcome SMS if phone number is provided
+      if (formData.phone.trim()) {
+        try {
+          const welcomeMsg = generateWelcomeSMS(
+            formData.first_name,
+            'teacher',
+            formData.email.trim().toLowerCase(),
+            DEFAULT_TEACHER_PASSWORD,
+            user?.schoolName
+          );
+          await sendSMS(formData.phone.trim(), welcomeMsg);
+        } catch (smsError) {
+          console.warn('Welcome SMS failed:', smsError);
+        }
+      }
       toast.success(`Teacher ${teacherNumberLabel} added. Login: ${formData.email.trim().toLowerCase()} | Password: ${DEFAULT_TEACHER_PASSWORD}`);
       setShowAdd(false);
       setFormData({ first_name: '', last_name: '', email: '', phone: '', gender: '' as GenderType, qualification: '', specialization: '', tsc_number: '' });

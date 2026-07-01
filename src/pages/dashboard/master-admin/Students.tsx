@@ -108,7 +108,7 @@ export default function MasterAdminStudents() {
               <thead className="bg-gray-50 border-b">
                 <tr className="text-left text-gray-500">
                   <th className="px-4 py-3">Name</th>
-                  <th className="px-4 py-3">Admission No.</th>
+                  <th className="px-4 py-3">Assessment No.</th>
                   <th className="px-4 py-3">School</th>
                   <th className="px-4 py-3">Reseller</th>
                   <th className="px-4 py-3">Gender</th>

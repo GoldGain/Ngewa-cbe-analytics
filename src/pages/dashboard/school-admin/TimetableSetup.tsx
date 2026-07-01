@@ -17,6 +17,11 @@ interface DbTimetableConfig {
   afternoon_break_end: string;
   lunch_start: string;
   lunch_end: string;
+  // Per-level end times (flexible end times per level)
+  preprimary_end_time?: string;
+  primary_end_time?: string;
+  junior_end_time?: string;
+  senior_end_time?: string;
   created_at?: string;
   updated_at?: string;
 }
@@ -26,6 +31,11 @@ interface TimetableConfig {
   lesson_duration: number;
   school_start: string;
   school_end: string;
+  // Per-level end times
+  preprimary_end: string;
+  primary_end: string;
+  junior_end: string;
+  senior_end: string;
   first_break_start: string;
   first_break_end: string;
   second_break_start: string;
@@ -44,6 +54,10 @@ const mapDbToFrontend = (dbConfig: DbTimetableConfig | null, dbActivities: Recor
       lesson_duration: 40,
       school_start: '08:20',
       school_end: '16:00',
+      preprimary_end: '15:30',
+      primary_end: '15:30',
+      junior_end: '16:00',
+      senior_end: '16:00',
       first_break_start: '09:40',
       first_break_end: '10:20',
       second_break_start: '11:40',
@@ -57,6 +71,10 @@ const mapDbToFrontend = (dbConfig: DbTimetableConfig | null, dbActivities: Recor
     lesson_duration: dbConfig.lesson_duration_minutes || 40,
     school_start: dbConfig.school_start_time?.slice(0, 5) || '08:20',
     school_end: dbConfig.school_end_time?.slice(0, 5) || '15:40',
+    preprimary_end: dbConfig.preprimary_end_time?.slice(0, 5) || '15:30',
+    primary_end: dbConfig.primary_end_time?.slice(0, 5) || '15:30',
+    junior_end: dbConfig.junior_end_time?.slice(0, 5) || '16:00',
+    senior_end: dbConfig.senior_end_time?.slice(0, 5) || '16:00',
     first_break_start: dbConfig.morning_break_start?.slice(0, 5) || '09:40',
     first_break_end: dbConfig.morning_break_end?.slice(0, 5) || '10:20',
     second_break_start: dbConfig.afternoon_break_start?.slice(0, 5) || '11:40',
@@ -73,6 +91,10 @@ const mapFrontendToDb = (frontend: TimetableConfig, schoolId: string): DbTimetab
   lesson_duration_minutes: frontend.lesson_duration,
   school_start_time: frontend.school_start,
   school_end_time: frontend.school_end,
+  preprimary_end_time: frontend.preprimary_end,
+  primary_end_time: frontend.primary_end,
+  junior_end_time: frontend.junior_end,
+  senior_end_time: frontend.senior_end,
   morning_break_start: frontend.first_break_start,
   morning_break_end: frontend.first_break_end,
   afternoon_break_start: frontend.second_break_start,
@@ -207,8 +229,8 @@ export default function TimetableSetup() {
               school_id: schoolId,
               day_of_week: day,
               activity_name: activityName,
-              start_time: '15:40',
-              end_time: '16:20'
+              start_time: config.school_end,
+              end_time: '17:00'
             });
           if (insertError) console.error(`Failed to insert activity for day ${day}:`, insertError);
         }
@@ -237,14 +259,14 @@ export default function TimetableSetup() {
         <div>
           <p className="font-black">School Day Structure:</p>
           <p>
-            Lesson 1 & 2 → <strong>FIRST BREAK</strong> → Lesson 3 & 4 → <strong>SECOND BREAK</strong> → Lesson 5 & 6 → <strong>LUNCH</strong> → Lesson 7 & 8 → <strong>ACTIVITIES</strong>
+            Lesson 1 &amp; 2 → <strong>FIRST BREAK</strong> → Lesson 3 &amp; 4 → <strong>SECOND BREAK</strong> → Lesson 5 &amp; 6 → <strong>LUNCH</strong> → Lesson 7 &amp; 8 → <strong>ACTIVITIES</strong>
           </p>
         </div>
       </div>
 
       <div className="bg-white rounded-2xl p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,0.08)]">
         <h2 className="text-lg font-bold text-[#111111] mb-4 flex items-center gap-2"><Clock className="w-5 h-5" /> Lessons and Breaks</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
           <div>
             <label className="block text-sm font-medium text-[#111111] mb-2">Lesson duration (min)</label>
             <input
@@ -255,8 +277,22 @@ export default function TimetableSetup() {
             />
           </div>
           <TimeInput label="School starts" value={config.school_start} onChange={(value) => handleConfigChange('school_start', value)} />
-          <TimeInput label="School ends" value={config.school_end} onChange={(value) => handleConfigChange('school_end', value)} />
+          <TimeInput label="School ends (default)" value={config.school_end} onChange={(value) => handleConfigChange('school_end', value)} />
+        </div>
 
+        {/* Per-level flexible end times */}
+        <div className="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-xl">
+          <p className="text-sm font-semibold text-amber-800 mb-1">Flexible End Times Per Level</p>
+          <p className="text-xs text-amber-600 mb-3">Set different dismissal times for each school level. Junior and Senior School typically end at 16:00.</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <TimeInput label="Pre-Primary ends" value={config.preprimary_end} onChange={(value) => handleConfigChange('preprimary_end', value)} />
+            <TimeInput label="Primary ends" value={config.primary_end} onChange={(value) => handleConfigChange('primary_end', value)} />
+            <TimeInput label="Junior School ends" value={config.junior_end} onChange={(value) => handleConfigChange('junior_end', value)} />
+            <TimeInput label="Senior School ends" value={config.senior_end} onChange={(value) => handleConfigChange('senior_end', value)} />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <TimeInput label="FIRST BREAK starts" value={config.first_break_start} onChange={(value) => handleConfigChange('first_break_start', value)} />
           <TimeInput label="FIRST BREAK ends" value={config.first_break_end} onChange={(value) => handleConfigChange('first_break_end', value)} />
           <div className="hidden md:block" />

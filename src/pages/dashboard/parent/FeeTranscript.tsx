@@ -165,7 +165,7 @@ export default function ParentFeeTranscript() {
       doc.text('Student Information:', 14, 53);
       doc.setFont('helvetica', 'normal');
       doc.text(`Name: ${selectedChild.first_name} ${selectedChild.last_name}`, 14, 60);
-      doc.text(`Admission No: ${selectedChild.admission_number}`, 14, 67);
+      doc.text(`Assessment No: ${selectedChild.admission_number}`, 14, 67);
       doc.text(`Class: ${selectedChild.classes?.name || 'N/A'}`, 14, 74);
 
       // Summary Box

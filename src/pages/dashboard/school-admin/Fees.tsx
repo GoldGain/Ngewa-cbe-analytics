@@ -249,7 +249,7 @@ export default function SchoolAdminFees() {
     doc.text(`Receipt No: ${receiptNum}`, 14, 50);
     doc.text(`Date: ${new Date().toLocaleDateString()}`, 140, 50);
     doc.text(`Student: ${student.first_name} ${student.last_name}`, 14, 62);
-    doc.text(`Admission No: ${student.admission_number}`, 14, 72);
+    doc.text(`Assessment No: ${student.admission_number}`, 14, 72);
     doc.text(`Amount Paid: Ksh ${amount.toLocaleString()}`, 14, 82);
     doc.text(`Payment Method: ${method.toUpperCase()}`, 14, 92);
     if (ref) doc.text(`Reference: ${ref}`, 14, 102);
@@ -337,7 +337,7 @@ export default function SchoolAdminFees() {
       {/* Generate Invoice Form */}
       {showInvoice && (
         <div className="bg-white rounded-2xl p-6 shadow-sm border">
-          <h3 className="text-lg font-semibold mb-4">Generate Invoice for Student</h3>
+          <h3 className="text-lg font-semibold mb-4">Generate Invoice for Learner</h3>
           <form onSubmit={handleGenerateInvoice} className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <select value={invoiceData.student_id} onChange={e => setInvoiceData({...invoiceData, student_id: e.target.value})} className="w-full px-4 py-2.5 border rounded-xl text-sm bg-white" required>
               <option value="">Select Student *</option>
@@ -415,7 +415,7 @@ export default function SchoolAdminFees() {
             <table className="w-full text-left">
               <thead>
                 <tr className="border-b bg-gray-50">
-                  <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase">Student</th>
+                  <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase">Learner</th>
                   <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase">Term</th>
                   <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase">Total</th>
                   <th className="px-6 py-4 text-xs font-semibold text-gray-500 uppercase">Paid</th>

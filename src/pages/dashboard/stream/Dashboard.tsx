@@ -226,7 +226,7 @@ export default function StreamDashboard() {
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-          <div className="flex items-center gap-2 mb-1"><Users className="w-4 h-4 text-blue-600" /><span className="text-xs text-gray-500">Students</span></div>
+          <div className="flex items-center gap-2 mb-1"><Users className="w-4 h-4 text-blue-600" /><span className="text-xs text-gray-500">Learners</span></div>
           <div className="text-2xl font-bold text-gray-900">{rankings.length}</div>
         </div>
         <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
@@ -234,7 +234,7 @@ export default function StreamDashboard() {
           <div className="text-2xl font-bold text-gray-900">{classAvg !== null ? `${classAvg}%` : '—'}</div>
         </div>
         <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
-          <div className="flex items-center gap-2 mb-1"><BookOpen className="w-4 h-4 text-purple-600" /><span className="text-xs text-gray-500">Subjects</span></div>
+          <div className="flex items-center gap-2 mb-1"><BookOpen className="w-4 h-4 text-purple-600" /><span className="text-xs text-gray-500">Learning Areas</span></div>
           <div className="text-2xl font-bold text-gray-900">{subjectSummaries.length}</div>
         </div>
         <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100">
@@ -251,7 +251,7 @@ export default function StreamDashboard() {
             onClick={() => setActiveTab(tab)}
             className={`px-4 py-2 rounded-lg text-sm font-medium capitalize transition-colors ${activeTab === tab ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
           >
-            {tab === 'rankings' ? 'Student Rankings' : 'Subject Analysis'}
+            {tab === 'rankings' ? 'Learner Rankings' : 'Subject Analysis'}
           </button>
         ))}
       </div>
@@ -274,7 +274,7 @@ export default function StreamDashboard() {
       {activeTab === 'rankings' && (
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
           <div className="p-5 border-b border-gray-100">
-            <h3 className="font-bold text-gray-900">Student Rankings — {classInfo?.name}</h3>
+            <h3 className="font-bold text-gray-900">Learner Rankings — {classInfo?.name}</h3>
           </div>
           {loadingData ? (
             <div className="flex items-center justify-center py-12"><Loader2 className="w-6 h-6 animate-spin text-blue-600" /></div>
@@ -286,10 +286,10 @@ export default function StreamDashboard() {
                 <thead className="bg-gray-50">
                   <tr>
                     <th className="text-left py-3 px-6 text-xs font-semibold text-gray-500 uppercase">Pos</th>
-                    <th className="text-left py-3 px-6 text-xs font-semibold text-gray-500 uppercase">Student</th>
+                    <th className="text-left py-3 px-6 text-xs font-semibold text-gray-500 uppercase">Learner</th>
                     <th className="text-left py-3 px-6 text-xs font-semibold text-gray-500 uppercase">Adm No</th>
                     <th className="text-left py-3 px-6 text-xs font-semibold text-gray-500 uppercase">Avg %</th>
-                    <th className="text-left py-3 px-6 text-xs font-semibold text-gray-500 uppercase">Subjects</th>
+                    <th className="text-left py-3 px-6 text-xs font-semibold text-gray-500 uppercase">Learning Areas</th>
                     {subjectSummaries.slice(0, 4).map(sub => (
                       <th key={sub.id} className="text-left py-3 px-6 text-xs font-semibold text-gray-500 uppercase">{sub.name.substring(0, 6)}</th>
                     ))}
@@ -358,7 +358,7 @@ export default function StreamDashboard() {
                         <span>Lowest</span><span className="font-semibold text-red-600">{sub.lowest}%</span>
                       </div>
                       <div className="flex justify-between text-gray-600">
-                        <span>Students</span><span className="font-semibold">{sub.count}</span>
+                        <span>Learners</span><span className="font-semibold">{sub.count}</span>
                       </div>
                     </div>
                     {/* Mini progress bar */}
@@ -375,18 +375,18 @@ export default function StreamDashboard() {
               {/* Subject ranking table */}
               <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                 <div className="p-5 border-b border-gray-100">
-                  <h3 className="font-bold text-gray-900">Subject Performance Ranking</h3>
+                  <h3 className="font-bold text-gray-900">Learning Area Performance Ranking</h3>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead className="bg-gray-50">
                       <tr>
                         <th className="text-left py-3 px-6 text-xs font-semibold text-gray-500 uppercase">#</th>
-                        <th className="text-left py-3 px-6 text-xs font-semibold text-gray-500 uppercase">Subject</th>
+                        <th className="text-left py-3 px-6 text-xs font-semibold text-gray-500 uppercase">Learning Area</th>
                         <th className="text-left py-3 px-6 text-xs font-semibold text-gray-500 uppercase">Average</th>
                         <th className="text-left py-3 px-6 text-xs font-semibold text-gray-500 uppercase">Highest</th>
                         <th className="text-left py-3 px-6 text-xs font-semibold text-gray-500 uppercase">Lowest</th>
-                        <th className="text-left py-3 px-6 text-xs font-semibold text-gray-500 uppercase">Students</th>
+                        <th className="text-left py-3 px-6 text-xs font-semibold text-gray-500 uppercase">Learners</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-50">

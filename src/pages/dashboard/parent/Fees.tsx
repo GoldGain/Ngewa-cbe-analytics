@@ -137,7 +137,7 @@ export default function ParentFees() {
       // Student info
       doc.setTextColor(0, 0, 0); doc.setFontSize(11);
       doc.text(`Student: ${selectedChild.first_name} ${selectedChild.last_name}`, 14, 48);
-      doc.text(`Admission No: ${selectedChild.admission_number || 'N/A'}`, 14, 56);
+      doc.text(`Assessment No: ${selectedChild.admission_number || 'N/A'}`, 14, 56);
       doc.text(`Date: ${new Date().toLocaleDateString()}`, 140, 48);
 
       doc.setDrawColor(37, 99, 235); doc.line(14, 62, 196, 62);

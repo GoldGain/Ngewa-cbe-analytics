@@ -1,12 +1,13 @@
 // ─── Olympus SMS API Integration ─────────────────────────────────────────────
+// ⚠️ SENDER ID IS "PROCALL" — DO NOT CHANGE
 
 const OLYMPUS_API_URL = 'https://sms.ots.co.ke/api/v3/sms/send';
 const OLYMPUS_API_TOKEN = '3682|HN95vYSLpT8BcOjhWYj7gBVOXTSp1B3UsZFbtByfbfef70cf';
-const DEFAULT_SENDER_ID = 'CBE-ANALYTICS';
+const DEFAULT_SENDER_ID = 'PROCALL'; // ⚠️ CORRECT SENDER ID — MUST BE "PROCALL"
 
 interface SMSPayload {
   recipient: string;   // Format: 254XXXXXXXXX
-  sender_id: string;   // Must be "CBE-ANALYTICS"
+  sender_id: string;   // Must be "PROCALL"
   type: 'plain';       // Must be "plain"
   message: string;     // Plain text only, no emojis
 }
@@ -33,10 +34,13 @@ export async function sendSMS(phone: string, message: string): Promise<SMSRespon
     if (normalizedPhone.startsWith('+')) {
       normalizedPhone = normalizedPhone.slice(1);
     }
+    if (!normalizedPhone.startsWith('254')) {
+      normalizedPhone = '254' + normalizedPhone;
+    }
 
     const payload: SMSPayload = {
       recipient: normalizedPhone,
-      sender_id: DEFAULT_SENDER_ID,
+      sender_id: DEFAULT_SENDER_ID, // PROCALL
       type: 'plain',
       message: message.replace(/[^\w\s.,;:!?@#$%&*()\-+=/[\]{}|<>~^`\n]/g, ''), // Strip emojis
     };
@@ -90,6 +94,12 @@ export async function sendBulkSMS(recipients: string[], message: string): Promis
   };
 }
 
+// ─── OTP SMS ──────────────────────────────────────────────────────────────────
+
+export function generateOTPSMS(otp: string): string {
+  return `Password Reset Request\n\nYour OTP verification code is: ${otp}\n\nThis code will expire in 10 minutes.\n\nIf you did not request this, please ignore.\n\nSmarter Schools, Brighter Futures`;
+}
+
 // ─── Welcome SMS Messages ────────────────────────────────────────────────────
 
 export function generateWelcomeSMS(
@@ -100,7 +110,7 @@ export function generateWelcomeSMS(
   schoolName?: string
 ): string {
   const schoolLine = schoolName ? ` at ${schoolName}` : '';
-  return `Welcome to CBE-Analytics${schoolLine}!\n\nHello ${firstName}, your ${role} account has been created.\n\nLogin: ${email}\nPassword: ${password}\nPortal: https://cbe-analytics.com\n\nPlease change your password after first login.`;
+  return `Welcome to CBE-Analytics${schoolLine}!\n\nHello ${firstName}, your ${role} account has been created.\n\nLogin: ${email}\nPassword: ${password}\nPortal: https://cbe-analytics.com\n\nPlease change your password after first login.\n\nSmarter Schools, Brighter Futures`;
 }
 
 export function generateResultsSMS(
@@ -111,12 +121,12 @@ export function generateResultsSMS(
   position?: string
 ): string {
   const posLine = position ? `\nPosition: ${position}` : '';
-  return `CBE-Analytics: Results Notification\n\nDear ${parentName},\n${studentName}'s ${termName} results are now available.\nAverage: ${average}%${posLine}\n\nLogin to view full report: https://cbe-analytics.com`;
+  return `Dear ${parentName},\n${studentName}'s ${termName} results are now available.\nAverage: ${average}%${posLine}\n\nLogin: https://cbe-analytics.com\n\nSmarter Schools, Brighter Futures`;
 }
 
 export function generateAnnouncementSMS(
   schoolName: string,
   message: string
 ): string {
-  return `CBE-Analytics: ${schoolName}\n\n${message}`;
+  return `School Announcement\n\n${message}\n\nSmarter Schools, Brighter Futures`;
 }

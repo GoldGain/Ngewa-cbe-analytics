@@ -734,14 +734,14 @@ Respond ONLY with a valid JSON array (no markdown):
             </select>
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-600 mb-1">Subject</label>
+            <label>Learning Area</label>
             <select
               value={selectedSubject}
               onChange={e => setSelectedSubject(e.target.value)}
               className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               disabled={!selectedGrade}
             >
-              <option value="">Select Subject</option>
+              <option value="">Select Learning Area</option>
               {subjects.map(s => (
                 <option key={s.id} value={s.id}>{s.subject_name}</option>
               ))}

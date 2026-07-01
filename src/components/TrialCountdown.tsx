@@ -88,7 +88,7 @@ export const TrialCountdown: React.FC = () => {
               Subscribe to CBE-Analytics
             </h4>
             <p className="text-sm text-gray-600 mb-4">
-              Ksh 50 per learner per term
+              Ksh 30 per learner per term
             </p>
 
             {/* Auto-calculated learner count summary */}
@@ -105,7 +105,7 @@ export const TrialCountdown: React.FC = () => {
               </div>
               <div className="flex justify-between py-1.5 border-b border-gray-200">
                 <span className="text-sm text-gray-600">Price per Learner</span>
-                <span className="text-sm font-semibold">Ksh 50</span>
+                <span className="text-sm font-semibold">Ksh 30</span>
               </div>
               <div className="flex justify-between py-1.5">
                 <span className="text-sm font-bold text-gray-800">Total Amount</span>
@@ -113,7 +113,7 @@ export const TrialCountdown: React.FC = () => {
                   {fetchingLearners ? (
                     <Loader2 className="w-4 h-4 animate-spin inline" />
                   ) : (
-                    `Ksh ${(learnersCount * 50).toLocaleString()}`
+                    `Ksh ${(learnersCount * 30).toLocaleString()}`
                   )}
                 </span>
               </div>
@@ -132,7 +132,7 @@ export const TrialCountdown: React.FC = () => {
               ) : (
                 <>
                   <CreditCard className="w-4 h-4" />
-                  Subscribe Now — Ksh {(learnersCount * 50).toLocaleString()}
+                  Subscribe Now — Ksh {(learnersCount * 30).toLocaleString()}
                 </>
               )}
             </button>
@@ -196,7 +196,7 @@ export const TrialCountdown: React.FC = () => {
                   <div className={`text-xs ${subTextColor} space-y-1`}>
                     <p>Trial started: {new Date(trialStatus.trialData.trialStartDate).toLocaleDateString()}</p>
                     <p>Trial ends: {new Date(trialStatus.trialData.trialEndDate).toLocaleDateString()}</p>
-                    <p>Price: Ksh 50 per learner per term</p>
+                    <p>Price: Ksh 30 per learner per term</p>
                     <button
                       onClick={() => setShowPayment(true)}
                       className="mt-2 text-xs font-medium underline"

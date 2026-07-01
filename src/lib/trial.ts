@@ -4,7 +4,7 @@
 // ============================================================
 
 export const TRIAL_DAYS = 90;
-export const PRICE_PER_LEARNER = 50; // Ksh 50 per learner per term
+export const PRICE_PER_LEARNER = 30; // Ksh 30 per learner per term (discounted rate)
 
 export interface TrialData {
   trialStartDate: string;

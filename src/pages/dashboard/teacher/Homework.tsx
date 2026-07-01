@@ -161,7 +161,7 @@ export default function TeacherHomework() {
                 className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2563EB] bg-white"
                 required
               >
-                <option value="">Select Subject</option>
+                <option value="">Select Learning Area</option>
                 {subjects.map((s: any) => <option key={s.id} value={s.id}>{s.name}</option>)}
               </select>
               <input

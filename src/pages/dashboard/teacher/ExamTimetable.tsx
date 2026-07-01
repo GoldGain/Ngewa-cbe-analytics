@@ -418,12 +418,12 @@ export default function ExamTimetable() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Subject *</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Learning Area *</label>
               <input
                 type="text"
                 value={newSlot.subject}
                 onChange={e => setNewSlot({ ...newSlot, subject: e.target.value })}
-                placeholder="Subject"
+                placeholder="Learning Area"
                 list="subjects-list"
                 className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
@@ -495,7 +495,7 @@ export default function ExamTimetable() {
                   <tr className="text-left text-gray-500">
                     <th className="px-4 py-3 font-medium">Date</th>
                     <th className="px-4 py-3 font-medium">Time</th>
-                    <th className="px-4 py-3 font-medium">Subject</th>
+                    <th className="px-4 py-3 font-medium">Learning Area</th>
                     <th className="px-4 py-3 font-medium">Room</th>
                     <th className="px-4 py-3 font-medium">Invigilator</th>
                     <th className="px-4 py-3 font-medium">Action</th>

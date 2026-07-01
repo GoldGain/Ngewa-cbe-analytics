@@ -4,8 +4,8 @@ import { Users, FileText, CreditCard, BarChart3, Bell, Calendar, BookOpen, Shiel
 const features = [
   {
     icon: <Users className="w-6 h-6" />,
-    title: 'Student Management',
-    description: 'Complete student records with admission numbers, parent contacts, medical info, and academic history.',
+    title: 'Learner Management',
+    description: 'Complete learner records with assessment numbers, parent contacts, medical info, and academic history.',
     color: 'bg-blue-500',
   },
   {

@@ -357,7 +357,7 @@ export default function TeacherTimetable() {
                               type="text"
                               value={daySlot?.subject || ''}
                               onChange={e => handleSubjectChange(day, daySlot?.id || '', e.target.value)}
-                              placeholder="Subject"
+                              placeholder="Learning Area"
                               list="subjects-list"
                               className="w-full border border-gray-300 rounded px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />

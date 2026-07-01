@@ -175,7 +175,7 @@ export default function SubjectTeacherDashboard() {
     <div className="space-y-6">
       <div className="flex items-start justify-between flex-wrap gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-[#111111]">Subject Teacher Dashboard</h1>
+          <h1 className="text-2xl font-bold text-[#111111]">Learning Area Teacher Dashboard</h1>
           <p className="text-sm text-[#666666]">Your assigned subjects, classes, and student results</p>
         </div>
         {terms.length > 0 && (
@@ -289,7 +289,7 @@ export default function SubjectTeacherDashboard() {
                             <thead>
                               <tr className="bg-gray-50 border-b border-gray-100">
                                 <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">#</th>
-                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Student</th>
+                                <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Learner</th>
                                 <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Adm No.</th>
                                 <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Marks</th>
                                 <th className="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">%</th>

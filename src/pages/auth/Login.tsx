@@ -54,7 +54,7 @@ export default function Login() {
     try {
       let email = identifier;
 
-      // If using admission number, find the student's email
+      // If using assessment number, find the student's email
       if (loginMethod === 'admission') {
         const { data: student, error: studentError } = await supabase
           .from('students')
@@ -86,7 +86,7 @@ export default function Login() {
       });
 
       if (loginError) {
-        setError('❌ Invalid credentials. Please check your email/admission number and password.');
+        setError('❌ Invalid credentials. Please check your email/assessment number and password.');
         setLoading(false);
         return;
       }

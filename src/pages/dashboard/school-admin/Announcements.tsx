@@ -152,7 +152,7 @@ export default function SchoolAdminAnnouncements() {
         doc.setFont('helvetica', 'normal');
         doc.text(`${student.parent_name || 'Parent/Guardian'}`, 14, 57);
         doc.text(`Parent/Guardian of: ${student.first_name} ${student.last_name}`, 14, 64);
-        doc.text(`Admission No: ${student.admission_number}`, 14, 71);
+        doc.text(`Assessment No: ${student.admission_number}`, 14, 71);
         doc.text(`Class: ${classObj?.name || ''} ${classObj?.stream || ''}`, 14, 78);
 
         // Subject line
@@ -262,7 +262,7 @@ export default function SchoolAdminAnnouncements() {
         doc.setFont('helvetica', 'bold');
         doc.text(`${student.first_name} ${student.last_name}`, 14, 48);
         doc.setFont('helvetica', 'normal');
-        doc.text(`Admission No: ${student.admission_number}`, 14, 55);
+        doc.text(`Assessment No: ${student.admission_number}`, 14, 55);
         doc.text(`Class: ${classObj?.name || ''} ${classObj?.stream || ''}`, 14, 62);
         doc.text(`Parent/Guardian: ${student.parent_name || 'N/A'}`, 14, 69);
         doc.text(`Contact: ${student.parent_phone || student.parent_email || 'N/A'}`, 14, 76);
